@@ -1,6 +1,41 @@
 <template>
   <div id="viewBox">
     <div class="viewport">
+      <div class="header-left">
+        <img
+          src="../assets/image/nowtime.png"
+          alt=""
+        >
+        <span>{{nowtime}}</span>
+      </div>
+      <div class="header-title">智慧消防大数据平台</div>
+      <div class="header-right">
+        <div> <img
+            src="../assets/image/local.png"
+            alt=""
+          >
+          <span>{{intradayData.local}}</span>
+        </div>
+        <div><img
+            src="../assets/image/wind.png"
+            alt=""
+          >
+          <span>{{intradayData.wind}}</span>
+        </div>
+        <div> <img
+            src="../assets/image/temp.png"
+            alt=""
+          >
+          <span>{{intradayData.temp}}</span>
+        </div>
+        <div> <img
+            src="../assets/image/leaf.png"
+            alt=""
+          >
+          <span>{{intradayData.leaf}}</span>
+        </div>
+
+      </div>
       <div class="colum">
         <!-- 物联网检测出报警区域 -->
         <div class="panel view-alarm">
@@ -220,14 +255,20 @@ export default {
       rank: [{ rank: '一级', value: 79 }, { rank: '二级', value: 55 }, { rank: '三级', value: 8 }, { rank: '四级', value: 7 }, { rank: '五级', value: 2 }],
 
       // 实时警情列表数据
-      rankData: [{ time: '20201104 16:00', address: '成都高新区', area: '高新区', type: '社会救助', rank: '5', dispatch: '1（队）' }, { time: '20201104 16:00', address: '成都高新区', area: '高新区', type: '社会救助', rank: '4', dispatch: '1（队）' }, { time: '20201104 16:00', address: '成都高新区', area: '高新区', type: '社会救助', rank: '3', dispatch: '1（队）' }, { time: '20201104 16:00', address: '成都高新区', area: '高新区', type: '社会救助', rank: '2', dispatch: '1（队）' }, { time: '20201104 16:00', address: '成都高新区', area: '高新区', type: '社会救助', rank: '1', dispatch: '1（队）' }]
+      rankData: [{ time: '20201104 16:00', address: '成都高新区', area: '高新区', type: '社会救助', rank: '5', dispatch: '1（队）' }, { time: '20201104 16:00', address: '成都高新区', area: '高新区', type: '社会救助', rank: '4', dispatch: '1（队）' }, { time: '20201104 16:00', address: '成都高新区', area: '高新区', type: '社会救助', rank: '3', dispatch: '1（队）' }, { time: '20201104 16:00', address: '成都高新区', area: '高新区', type: '社会救助', rank: '2', dispatch: '1（队）' }, { time: '20201104 16:00', address: '成都高新区', area: '高新区', type: '社会救助', rank: '1', dispatch: '1（队）' }],
+      nowtime: '',
+      intradayData: { local: '成都', temp: '25°', wind: '6', leaf: '5' }
     }
   },
   mounted () {
+    this.getnowtime()
   },
   methods: {
     changenumArr () {
       this.numArr = this.numArr.join(',')
+    },
+    getnowtime () {
+      this.nowtime = new Date(+new Date() + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
     }
 
   }
@@ -265,22 +306,67 @@ export default {
   font-size: 12px;
 }
 .viewport {
-  display: flex;
+  position: relative;
   min-width: 1024px;
   max-width: 1920px;
   margin: 0 auto;
-  padding: 5.375rem 0.625rem 0.625rem 0.625rem;
+  padding-top: 5.375rem;
   background: url('../assets/image/logo.png') no-repeat 0 0 / contain;
   min-height: 780px;
   .colum {
-    flex: 3;
+    display: inline-block;
+    width: 474px;
     color: #fff;
   }
   .colum-center {
-    flex: 4;
+    display: inline-block;
+    width: 949px;
     // margin: 0 0.8125rem;
     margin-left: 0.8125rem;
   }
+}
+.header-left {
+  position: absolute;
+  display: flex;
+  top: 32px;
+  left: 92px;
+  width: 245px;
+  color: #fff;
+}
+.header-left span {
+  font-size: 14px;
+  text-align: left;
+}
+.header-left img{
+  margin-right: 5px;
+}
+
+.header-right {
+  position: absolute;
+  width: 355px;
+  display: flex;
+    justify-content: space-between;
+  top: 32px;
+  right: 154px;
+  width: 245px;
+  color: #fff;
+}
+.header-right img{
+  margin-right: 5px;
+}
+.header-title {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -217px;
+  width: 434px;
+  height: 51px;
+  font-size: 48px;
+  font-family: PangMenZhengDao, PangMenZhengDao-Regular;
+  font-weight: 400;
+  text-align: center;
+  color: #ffffff;
+  text-shadow: 0px 0px 12px 0px #0078d7;
 }
 .panel {
   position: relative;
@@ -313,7 +399,6 @@ export default {
 }
 .equipment-chart {
   width: 100%;
-  height: 100%;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -327,7 +412,7 @@ export default {
   height: 20.3125rem;
 }
 .warn-statistics-chart {
-  width: 100%;
+  // width: 100%;
 }
 .realwarm-list {
   box-sizing: border-box;

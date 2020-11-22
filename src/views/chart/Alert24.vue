@@ -1,7 +1,7 @@
 <template>
   <div
     id="alert24"
-    :style="{ width: '474px', height: '240px' }"
+    :style="{ width: '100%', height: '240px' }"
   ></div>
 </template>
 <script>
@@ -28,12 +28,12 @@ export default {
         },
         legend: {
           icon: 'circle',
-          bottom: '23%',
+          bottom: '14%',
           left: 0,
           itemWidth: 10,
           textStyle: {
             color: '#fff',
-            fontSize: 12
+            fontSize: 11
           },
           data: ['火灾扑救', '抢险救援', '反恐排爆', '公务执勤', '社会救助', '其他出动']
         },

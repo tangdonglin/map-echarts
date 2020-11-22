@@ -1,12 +1,12 @@
 <template>
-  <div :style="{ width:'474px', display:'flex'}">
+  <div :style="{ width:'100%', display:'flex'}">
     <div
       id="realAlert"
       :style="{ width: '180px', height: '240px' }"
     ></div>
     <div
       id="realPie"
-      :style="{ width: '290px', height: '240px' }"
+      :style="{ width:'230px',height: '240px' }"
     >
     </div>
   </div>
