@@ -1,61 +1,82 @@
 <template>
   <div>
-    <div
-      id="riskchart"
-      :style="{ width: '250px', height: '260px' }"
-    ></div>
+    <div id="riskchart" :style="{ width: '250px', height: '260px' }"></div>
 
     <div></div>
   </div>
 </template>
 <script>
 export default {
-  name: 'hello',
-  data () {
+  name: "hello",
+  data() {
     return {
-      riskData: [{ name: '锦江区', value: 1548 }, { name: '高新区', value: 535 }, { name: '青羊区', value: 567 }, { name: '武侯区', value: '成华区' }, { name: '其他区', value: 634 }],
+      riskData: [
+        { name: "锦江区", value: 1548 },
+        { name: "高新区", value: 535 },
+        { name: "青羊区", value: 567 },
+        { name: "武侯区", value: 666 },
+        { name: "成华区", value: 332 },
+        { name: "其他区", value: 634 }
+      ],
       legendData: []
-    }
+    };
   },
-  mounted () {
-    this.drawPie()
+  mounted() {
+    this.drawPie();
     // window.onresize = () => {
     //   const riskchart = this.$echarts.init(document.getElementById('riskchart'))
     //   riskchart.resize()
     // }
   },
   methods: {
-    drawPie () {
+    drawPie() {
       // 基于准备好的dom，初始化echarts实例
-      const riskchart = this.$echarts.init(document.getElementById('riskchart'))
-      this.legendData = ['锦江区', '高新区', '青羊区', '武侯区', '成华区', '其他区']
+      const riskchart = this.$echarts.init(
+        document.getElementById("riskchart")
+      );
+      this.legendData = [
+        "锦江区",
+        "高新区",
+        "青羊区",
+        "武侯区",
+        "成华区",
+        "其他区"
+      ];
       // 绘制图表
       riskchart.setOption({
         legend: {
-          icon: 'circle',
+          icon: "circle",
           textStyle: {
-            color: '#fff'
+            color: "#fff"
           },
           // orient: 'vertical',
           // top: 'middle',
           bottom: 20,
-          left: 'center',
+          left: "center",
           data: this.legendData
         },
+        color: [
+          "#009BEE",
+          "#98C469",
+          "#FFC470",
+          "#FF8B61",
+          "#FF6B61",
+          "#9B7BE0"
+        ],
         series: [
           {
-            type: 'pie',
-            radius: '45%',
-            center: ['50%', '40%'],
-            selectedMode: 'single',
+            type: "pie",
+            radius: "45%",
+            center: ["50%", "40%"],
+            selectedMode: "single",
             data: this.riskData,
             label: {
               show: true,
               textStyle: {
-                color: '#fff'
+                color: "#fff"
               },
-              formatter: function (arg) {
-                return arg.name + '\n' + arg.percent + '%'
+              formatter: function(arg) {
+                return arg.name + "\n" + arg.percent + "%";
               }
             },
             labelLine: {
@@ -65,16 +86,15 @@ export default {
               itemStyle: {
                 shadowBlur: 10,
                 shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                shadowColor: "rgba(0, 0, 0, 0.5)"
               }
             }
           }
         ]
-
-      })
+      });
     }
   }
-}
+};
 </script>
 <style lang="less" scoped>
 // scoped不加style 是全局生效  加上是当前组件生效
